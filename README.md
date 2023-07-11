@@ -1,6 +1,6 @@
-# Futured Dev Academy (iOS)
+# Futured Dev Academy (iOS) 2023
 
-Welcome to the Futured Dev Academy!
+Repository for the Futured Dev Academy 2023
 
 ### Futured Team:
 
@@ -11,7 +11,7 @@ Welcome to the Futured Dev Academy!
 - Marie Re, iOS developer, <marie.re@futured.app>
 
 ### Future Graduate:
-- ~~Jan Novak, <jan.novak@futured.app>~~
+- Tomáš Tomala, <tomalatms@gmail.com>
 
 ### Tools
 
