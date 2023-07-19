@@ -18,14 +18,15 @@ class DataService {
     private init(){
     }
     
-    func fetchData(action: (Result<Features, Error>) -> Void) {
+    func fetchData(action: @escaping (Result<Features, Error>?) -> Void) {
         if let data {
             action(data)
-            return()
+            return
         }
         
-        let timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { [self] timer in
-            data = .success(DataService.mockData)
+        _ = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { [weak self] timer in
+            self?.data = .success(DataService.mockData)
+            action(self?.data)
         }
     }
 }

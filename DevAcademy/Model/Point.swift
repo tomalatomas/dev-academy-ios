@@ -12,6 +12,6 @@
 import Foundation
 
 struct Point {
-    let latitude: Float
-    let longitude: Float
+    let latitude: Double
+    let longitude: Double
 }
