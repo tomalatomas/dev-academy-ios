@@ -22,7 +22,6 @@ struct PlaceCellView: View {
                 content: { image in
                     image
                         .resizable()
-
                         .aspectRatio(contentMode: .fit)
                         .frame(maxWidth: 60, maxHeight: 60)
                         .cornerRadius(8)
