@@ -52,14 +52,17 @@ struct PlacesView: View {
         .sheet(isPresented: $showFavorites){
             List(favorites, id:\.properties.ogcFid) { feature in
                 PlaceCellView(feature: feature)
+                    .onTapGesture {
+                        onFavoriteTapped(feature: feature)
+                    }
             }
                 .presentationDetents([.medium])
                 .presentationDragIndicator(.visible)
         }
     }
     
-    func onFeatureTapped(feature: Feature) {
-        features.removeAll(where: {$0.properties.ogcFid == feature.properties.ogcFid})
+    func onFavoriteTapped(feature: Feature) {
+        favorites.removeAll(where: {$0.properties.ogcFid == feature.properties.ogcFid})
     }
     
     func fetch() {
