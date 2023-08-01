@@ -36,6 +36,7 @@ struct PlaceDetail: View {
             }
             .ignoresSafeArea(.all, edges: [.bottom])
             VStack{
+                Spacer()
                 Button {
                     showDetail.toggle()
                 } label: {
@@ -44,8 +45,6 @@ struct PlaceDetail: View {
                         .background(Color.white.opacity(0.8))
                         .cornerRadius(13)
                 }
-
-                Spacer()
             }
             .padding(10)
         }
