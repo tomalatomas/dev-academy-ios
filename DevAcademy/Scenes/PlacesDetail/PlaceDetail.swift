@@ -10,11 +10,23 @@
 //
 
 import SwiftUI
+import MapKit
+
 
 struct PlaceDetail: View {
     var feature: Feature
     @Binding var favorites: [Feature]
+    @State private var mapRegion: MKCoordinateRegion
+    private let markers: [PlaceMarker]
     
+    init(feature: Feature, favorites: Binding<[Feature]>) {
+        self.feature = feature
+        self._favorites = favorites
+        self._mapRegion = State(initialValue: MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: feature.geometry.latitude, longitude: feature.geometry.longitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)))
+        self.markers = [PlaceMarker(location: MapMarker(coordinate: CLLocationCoordinate2D(latitude: feature.geometry.latitude, longitude: feature.geometry.longitude), tint: .red))]
+    }
+
+
     var body: some View {
         VStack(){
             AsyncImage(
@@ -24,6 +36,9 @@ struct PlaceDetail: View {
                         .resizable()
                         .frame(maxHeight: 200)
                         .aspectRatio(contentMode: .fill)
+                        .cornerRadius(13)
+                        .shadow(radius: 5)
+
                 },
                 placeholder: {
                     ProgressView()
@@ -35,9 +50,14 @@ struct PlaceDetail: View {
                 .fontWeight(.bold)
                 .foregroundColor(.secondary)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(5)
-            Spacer()
+            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
+                .font(.body)
+            Map(coordinateRegion: $mapRegion, annotationItems: markers){_ in
+                MapMarker(coordinate: CLLocationCoordinate2D(latitude: feature.geometry.latitude, longitude: feature.geometry.longitude))
+            }
+                .cornerRadius(13)
         }
+        .padding(13)
         .navigationTitle(feature.properties.nazev)
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
