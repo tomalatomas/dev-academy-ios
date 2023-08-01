@@ -12,13 +12,12 @@
 import SwiftUI
 import MapKit
 
-
 struct PlaceDetail: View {
     let feature: Feature
     @Binding var favorites: [Feature]
     @State private var mapRegion: MKCoordinateRegion
-    private let markers: [PlaceMarker]
     @State private var showDetail: Bool
+    private let markers: [PlaceMarker]
     
     init(feature: Feature, favorites: Binding<[Feature]>) {
         self.feature = feature
@@ -31,10 +30,11 @@ struct PlaceDetail: View {
 
     var body: some View {
         ZStack {
-            Map(coordinateRegion: $mapRegion, annotationItems: markers){_ in
-                MapMarker(coordinate: CLLocationCoordinate2D(latitude: feature.geometry.latitude, longitude: feature.geometry.longitude))
+            Map(coordinateRegion: $mapRegion, annotationItems: markers){ marker in
+                marker.location
             }
             .ignoresSafeArea(.all, edges: [.bottom])
+            
             VStack{
                 Spacer()
                 Button {
@@ -46,32 +46,35 @@ struct PlaceDetail: View {
                         .cornerRadius(13)
                 }
             }
-            .padding(10)
+            .padding(.bottom, 15)
         }
+        .navigationTitle(feature.properties.nazev)
         .sheet(isPresented: $showDetail){
             PlaceDetailInfo(feature: feature)
                 .presentationDetents([.medium])
         }
-        .navigationTitle(feature.properties.nazev)
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
                 Button {
-                    if favorites.contains(feature) {
-                        favorites.removeAll(where: {$0.properties.ogcFid == feature.properties.ogcFid})
-                    } else {
-                        favorites.append(feature)
-                    }
+                    onTapFavorite()
                 } label: {
                     Image(systemName: favorites.contains(feature) ? "heart.fill" : "heart")
                 }
             }
         }
     }
+    
+    func onTapFavorite(){
+        if favorites.contains(feature) {
+            favorites.removeAll(where: {$0.properties.ogcFid == feature.properties.ogcFid})
+        } else {
+            favorites.append(feature)
+        }
+    }
 }
 
 struct PlaceDetail_Previews: PreviewProvider {
     static var previews: some View {
-        //PlaceDetail(feature: .constant(Features.mock.features.first!))
         PlaceDetail(feature: Features.mock.features.first!, favorites: .constant([]))
     }
 }
