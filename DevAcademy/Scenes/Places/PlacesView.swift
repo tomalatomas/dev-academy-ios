@@ -15,6 +15,7 @@ import ActivityIndicatorView
 struct PlacesView: View {
     @State var features: [Feature] = Features.mock.features
     @State var showFavorites: Bool = false
+    @State var favorites: [Feature] = []
     
     var body: some View {
         NavigationStack {
@@ -22,7 +23,7 @@ struct PlacesView: View {
                 if !features.isEmpty {
                     List(features, id:\.properties.ogcFid){ feature in
                         NavigationLink {
-                            PlaceDetail(feature: feature)
+                            PlaceDetail(feature: feature, favorites: $favorites)
                         } label: {
                             PlaceCellView(feature: feature)
                         }
@@ -42,14 +43,16 @@ struct PlacesView: View {
                     Button {
                         showFavorites.toggle()
                     } label: {
-                        Image(systemName: showFavorites ? "heart.fill" : "heart")
+                        Image(systemName: "heart")
                     }
                 }
             }
         }
         .onAppear(perform: fetch)
         .sheet(isPresented: $showFavorites){
-            Text("Modal")
+            List(favorites, id:\.properties.ogcFid) { feature in
+                PlaceCellView(feature: feature)
+            }
                 .presentationDetents([.medium])
                 .presentationDragIndicator(.visible)
         }
