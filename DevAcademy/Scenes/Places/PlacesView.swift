@@ -10,28 +10,49 @@
 //
 
 import SwiftUI
+import ActivityIndicatorView
 
 struct PlacesView: View {
     @State var features: [Feature] = Features.mock.features
+    @State var showFavorites: Bool = false
+    
     var body: some View {
         NavigationStack {
             Group {
                 if !features.isEmpty {
                     List(features, id:\.properties.ogcFid){ feature in
-                        PlaceCellView(feature: feature)
-                            .onTapGesture {
-                                onFeatureTapped(feature: feature)
-                            }
+                        NavigationLink {
+                            PlaceDetail(feature: feature)
+                        } label: {
+                            PlaceCellView(feature: feature)
+                        }
                     }
                     .animation(.easeInOut, value: features)
                     .listStyle(.plain)
                 } else {
-                    ProgressView()
+                    ActivityIndicatorView(isVisible: .constant(true),
+                                          type: .opacityDots(count: 5, inset: 10))
+                    .frame(width: 100)
                 }
             }
             .navigationTitle("Kultůrmapa")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItemGroup(placement: .primaryAction) {
+                    Button {
+                        showFavorites.toggle()
+                    } label: {
+                        Image(systemName: showFavorites ? "heart.fill" : "heart")
+                    }
+                }
+            }
         }
         .onAppear(perform: fetch)
+        .sheet(isPresented: $showFavorites){
+            Text("Modal")
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.visible)
+        }
     }
     
     func onFeatureTapped(feature: Feature) {
