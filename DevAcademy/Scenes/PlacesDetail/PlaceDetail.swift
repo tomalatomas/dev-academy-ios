@@ -14,50 +14,45 @@ import MapKit
 
 
 struct PlaceDetail: View {
-    var feature: Feature
+    let feature: Feature
     @Binding var favorites: [Feature]
     @State private var mapRegion: MKCoordinateRegion
     private let markers: [PlaceMarker]
+    @State private var showDetail: Bool
     
     init(feature: Feature, favorites: Binding<[Feature]>) {
         self.feature = feature
         self._favorites = favorites
         self._mapRegion = State(initialValue: MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: feature.geometry.latitude, longitude: feature.geometry.longitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)))
         self.markers = [PlaceMarker(location: MapMarker(coordinate: CLLocationCoordinate2D(latitude: feature.geometry.latitude, longitude: feature.geometry.longitude), tint: .red))]
+        self._showDetail = State(initialValue: false)
     }
 
 
     var body: some View {
-        VStack(){
-            AsyncImage(
-                url: feature.properties.obrId1,
-                content: { image in
-                    image
-                        .resizable()
-                        .frame(maxHeight: 200)
-                        .aspectRatio(contentMode: .fill)
-                        .cornerRadius(13)
-                        .shadow(radius: 5)
-
-                },
-                placeholder: {
-                    ProgressView()
-
-                }
-            )
-            Text(feature.properties.druh.rawValue)
-                .font(.title2)
-                .fontWeight(.bold)
-                .foregroundColor(.secondary)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
-                .font(.body)
+        ZStack {
             Map(coordinateRegion: $mapRegion, annotationItems: markers){_ in
                 MapMarker(coordinate: CLLocationCoordinate2D(latitude: feature.geometry.latitude, longitude: feature.geometry.longitude))
             }
-                .cornerRadius(13)
+            .ignoresSafeArea(.all, edges: [.bottom])
+            VStack{
+                Button {
+                    showDetail.toggle()
+                } label: {
+                    PlaceCellView(feature: feature)
+                        .padding(10)
+                        .background(Color.white.opacity(0.8))
+                        .cornerRadius(13)
+                }
+
+                Spacer()
+            }
+            .padding(10)
         }
-        .padding(13)
+        .sheet(isPresented: $showDetail){
+            PlaceDetailInfo(feature: feature)
+                .presentationDetents([.medium])
+        }
         .navigationTitle(feature.properties.nazev)
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
@@ -81,3 +76,5 @@ struct PlaceDetail_Previews: PreviewProvider {
         PlaceDetail(feature: Features.mock.features.first!, favorites: .constant([]))
     }
 }
+
+

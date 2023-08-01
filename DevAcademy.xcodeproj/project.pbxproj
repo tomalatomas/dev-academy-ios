@@ -15,6 +15,7 @@
 		A25658AA2A7932FC00536106 /* PlaceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25658A92A7932FC00536106 /* PlaceDetail.swift */; };
 		A25658AD2A7937D300536106 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = A25658AC2A7937D300536106 /* ActivityIndicatorView */; };
 		A25658B12A79439300536106 /* PlaceMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25658B02A79439300536106 /* PlaceMarker.swift */; };
+		A25658B32A794A4000536106 /* PlaceDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25658B22A794A4000536106 /* PlaceDetailInfo.swift */; };
 		A26C4D422A7003760063FBCF /* PlacesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26C4D412A7003760063FBCF /* PlacesView.swift */; };
 		A26C4D442A70042D0063FBCF /* PlaceCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26C4D432A70042D0063FBCF /* PlaceCellView.swift */; };
 		C05610492A5C78CA007FB970 /* DevAcademyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05610482A5C78CA007FB970 /* DevAcademyApp.swift */; };
@@ -31,6 +32,7 @@
 		A24109992A66CD2500F465FD /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		A25658A92A7932FC00536106 /* PlaceDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetail.swift; sourceTree = "<group>"; };
 		A25658B02A79439300536106 /* PlaceMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceMarker.swift; sourceTree = "<group>"; };
+		A25658B22A794A4000536106 /* PlaceDetailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailInfo.swift; sourceTree = "<group>"; };
 		A26C4D412A7003760063FBCF /* PlacesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesView.swift; sourceTree = "<group>"; };
 		A26C4D432A70042D0063FBCF /* PlaceCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCellView.swift; sourceTree = "<group>"; };
 		C05610452A5C78CA007FB970 /* DevAcademy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevAcademy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				A25658A92A7932FC00536106 /* PlaceDetail.swift */,
+				A25658B22A794A4000536106 /* PlaceDetailInfo.swift */,
 			);
 			path = PlacesDetail;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				A241099A2A66CD2500F465FD /* DataService.swift in Sources */,
 				A25658B12A79439300536106 /* PlaceMarker.swift in Sources */,
 				A24109942A66CBCD00F465FD /* Properties.swift in Sources */,
+				A25658B32A794A4000536106 /* PlaceDetailInfo.swift in Sources */,
 				A26C4D442A70042D0063FBCF /* PlaceCellView.swift in Sources */,
 				A25658AA2A7932FC00536106 /* PlaceDetail.swift in Sources */,
 				A24109962A66CC3E00F465FD /* Point.swift in Sources */,
