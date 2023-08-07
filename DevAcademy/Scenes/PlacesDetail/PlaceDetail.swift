@@ -35,18 +35,16 @@ struct PlaceDetail: View {
             }
             .ignoresSafeArea(.all, edges: [.bottom])
             
-            VStack{
-                Spacer()
-                Button {
-                    showDetail.toggle()
-                } label: {
-                    PlaceCellView(feature: feature)
-                        .padding(10)
-                        .background(Color.white.opacity(0.8))
-                        .cornerRadius(13)
-                }
+            Button {
+                showDetail.toggle()
+            } label: {
+                PlaceCellView(feature: feature)
+                    .padding(10)
+                    .background(Color.white.opacity(0.8))
+                    .cornerRadius(13)
             }
-            .padding(.bottom, 15)
+            .frame(maxHeight: .infinity, alignment: .bottom)
+            .padding(.bottom, 20)
         }
         .navigationTitle(feature.properties.nazev)
         .sheet(isPresented: $showDetail){
