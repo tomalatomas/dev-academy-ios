@@ -32,4 +32,12 @@ struct PlaceDetailVM: DynamicProperty {
     var placeName: String {
         place.properties.nazev
     }
+    
+    var placeType: String {
+        place.properties.druh.rawValue
+    }
+    
+    var placeImage: URL {
+        place.properties.obrId1
+    }
 }

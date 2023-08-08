@@ -35,7 +35,7 @@ struct PlaceDetail: View {
         }
         .navigationTitle(placeDetailVM.placeName)
         .sheet(isPresented: placeDetailVM.$showDetail){
-            PlaceDetailInfo(place: placeDetailVM.place)
+            PlaceDetailInfo(state: placeDetailVM)
                 .presentationDetents([.medium])
         }
     }

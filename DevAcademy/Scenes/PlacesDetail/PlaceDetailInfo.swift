@@ -12,7 +12,7 @@
 import SwiftUI
 
 struct PlaceDetailInfo: View {
-    let place: Place
+    let state: PlaceDetailVM
     
     var body: some View {
         VStack {
@@ -20,7 +20,7 @@ struct PlaceDetailInfo: View {
                 .frame(width: 30, height: 3)
                 .foregroundColor(.gray)
             AsyncImage(
-                url: place.properties.obrId1,
+                url: state.placeImage,
                 content: { image in
                     image
                         .resizable()
@@ -33,21 +33,14 @@ struct PlaceDetailInfo: View {
                     ProgressView()
                 }
             )
-            Text(place.properties.druh.rawValue)
+            Text(state.placeType)
                 .font(.title2)
                 .fontWeight(.bold)
                 .foregroundColor(.secondary)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
-                .font(.body)
         }
         .padding(10)
         Spacer()
     }
 }
 
-struct PlaceDetailInfo_Previews: PreviewProvider {
-    static var previews: some View {
-        PlaceDetailInfo(place: Places.mock.places.first!)
-    }
-}
