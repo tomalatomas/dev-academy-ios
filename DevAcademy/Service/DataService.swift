@@ -33,5 +33,5 @@ class DataService {
 }
 
 extension DataService {
-    private static var mockData: Places = Places(features: [])
+    private static var mockData: Places = Places(places: [])
 }

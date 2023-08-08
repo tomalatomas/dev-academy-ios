@@ -22,7 +22,7 @@ class PlacesObservable: ObservableObject {
         service.fetchData { result in
             switch result {
             case .success(let places):
-                self.places = places.features
+                self.places = places.places
             case .failure(let err):
                 print(err)
             }

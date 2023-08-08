@@ -1,5 +1,5 @@
 //
-// Filename: Feature.swift
+// Filename: Place.swift
 // Project: DevAcademy
 //
 // Developer:
@@ -22,12 +22,12 @@ struct Place: Equatable {
 }
 
 struct Places {
-    let features: [Place]
+    let places: [Place]
 }
 
 extension Places {
     static let mock: Places = Places(
-        features: [
+        places: [
             Place(
                 geometry: Point(latitude: 49.1913, longitude: 16.6115),
                 properties: Properties(

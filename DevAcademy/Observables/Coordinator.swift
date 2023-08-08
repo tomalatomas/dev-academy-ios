@@ -12,7 +12,6 @@
 import SwiftUI
 
 class Coordinator: ObservableObject {
-
     var placesScene: some View {
         PlacesView()
     }

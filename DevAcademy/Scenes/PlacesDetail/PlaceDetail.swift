@@ -25,7 +25,7 @@ struct PlaceDetail: View {
             Button {
                 placeDetailVM.showDetail.toggle()
             } label: {
-                PlaceCellView(feature: placeDetailVM.place)
+                PlaceCellView(place: placeDetailVM.place)
                     .padding(10)
                     .background(Color.white.opacity(0.8))
                     .cornerRadius(13)
@@ -35,7 +35,7 @@ struct PlaceDetail: View {
         }
         .navigationTitle(placeDetailVM.placeName)
         .sheet(isPresented: placeDetailVM.$showDetail){
-            PlaceDetailInfo(feature: placeDetailVM.place)
+            PlaceDetailInfo(place: placeDetailVM.place)
                 .presentationDetents([.medium])
         }
     }
@@ -43,7 +43,7 @@ struct PlaceDetail: View {
 
 struct PlaceDetail_Previews: PreviewProvider {
     static var previews: some View {
-        PlaceDetail(placeDetailVM: PlaceDetailVM(for: Places.mock.features[0]))
+        PlaceDetail(placeDetailVM: PlaceDetailVM(for: Places.mock.places[0]))
     }
 }
 

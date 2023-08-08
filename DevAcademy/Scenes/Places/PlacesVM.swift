@@ -24,7 +24,7 @@ struct PlacesVM: DynamicProperty {
         placesObservable.favorites
     }
     
-    var featuresAreLoaded: Bool {
+    var placesAreLoaded: Bool {
         !places.isEmpty
     }
 

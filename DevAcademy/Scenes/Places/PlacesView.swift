@@ -16,7 +16,6 @@ struct PlacesView: View {
     @EnvironmentObject private var coordinator: Coordinator
     let placesVM: PlacesVM = PlacesVM()
 
-    
     var body: some View {
         NavigationStack {
             Group {
@@ -25,7 +24,7 @@ struct PlacesView: View {
                         NavigationLink {
                             coordinator.placeDetailScene(for: place)
                         } label: {
-                            PlaceCellView(feature: place)
+                            PlaceCellView(place: place)
                         }
                     }
                     .animation(.easeInOut, value: placesVM.places)
@@ -51,7 +50,7 @@ struct PlacesView: View {
         .onAppear(perform: placesVM.fetch)
         .sheet(isPresented: placesVM.$showFavorites){
             List(placesVM.favorites, id:\.properties.ogcFid) { place in
-                PlaceCellView(feature: place)
+                PlaceCellView(place: place)
                     .onTapGesture {
                         placesVM.addToFavorites(place: place)
                     }

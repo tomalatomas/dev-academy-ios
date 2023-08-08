@@ -12,7 +12,6 @@
 import SwiftUI
 import MapKit
 
-
 struct PlaceDetailVM: DynamicProperty {
     var place: Place
     @State var showDetail: Bool

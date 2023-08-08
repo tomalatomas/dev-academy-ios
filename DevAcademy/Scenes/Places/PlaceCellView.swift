@@ -12,13 +12,12 @@
 import SwiftUI
 
 struct PlaceCellView: View {
-    // @Binding var feature: Feature
-    var feature: Place
+    var place: Place
 
     var body: some View {
         HStack {
             AsyncImage(
-                url: feature.properties.obrId1,
+                url: place.properties.obrId1,
                 content: { image in
                     image
                         .resizable()
@@ -32,11 +31,11 @@ struct PlaceCellView: View {
                 }
             )
             VStack(alignment: .leading) {
-                Text(feature.properties.nazev)
+                Text(place.properties.nazev)
                     .font(.title2)
                     .fontWeight(.semibold)
                     .lineLimit(1)
-                Text(feature.properties.druh.rawValue)
+                Text(place.properties.druh.rawValue)
                     .foregroundColor(.secondary)
                     .font(.subheadline)
             }
@@ -46,7 +45,6 @@ struct PlaceCellView: View {
 
 struct PlaceCellView_Previews: PreviewProvider {
     static var previews: some View {
-        // PlaceCellView(feature: .constant(Features.mock.features.first!))
-        PlaceCellView(feature: Places.mock.features.first!)
+        PlaceCellView(place: Places.mock.places.first!)
     }
 }
