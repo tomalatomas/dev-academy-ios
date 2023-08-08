@@ -16,12 +16,12 @@ struct PlacesView: View {
     @State var features: [Feature] = Features.mock.features
     @State var showFavorites: Bool = false
     @State var favorites: [Feature] = []
-    
+
     var body: some View {
         NavigationStack {
             Group {
                 if !features.isEmpty {
-                    List(features, id:\.properties.ogcFid){ feature in
+                    List(features, id: \.properties.ogcFid) { feature in
                         NavigationLink {
                             PlaceDetail(feature: feature, favorites: $favorites)
                         } label: {
@@ -49,8 +49,8 @@ struct PlacesView: View {
             }
         }
         .onAppear(perform: fetch)
-        .sheet(isPresented: $showFavorites){
-            List(favorites, id:\.properties.ogcFid) { feature in
+        .sheet(isPresented: $showFavorites) {
+            List(favorites, id: \.properties.ogcFid) { feature in
                 PlaceCellView(feature: feature)
                     .onTapGesture {
                         onFavoriteTapped(feature: feature)
@@ -60,11 +60,11 @@ struct PlacesView: View {
                 .presentationDragIndicator(.visible)
         }
     }
-    
+
     func onFavoriteTapped(feature: Feature) {
         favorites.removeAll(where: {$0.properties.ogcFid == feature.properties.ogcFid})
     }
-    
+
     func fetch() {
         DataService.shared.fetchData { result in
             switch result {

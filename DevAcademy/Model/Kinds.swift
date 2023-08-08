@@ -36,16 +36,16 @@ enum PossibleKind: RawRepresentable {
             self = .unknown(rawValue)
         }
     }
-    
+
     var rawValue: String {
         switch self {
         case .kind(let type): return type.rawValue
         case .unknown(let text): return text
         }
     }
-    
+
     typealias RawValue = String
-    
+
     case kind(Kind)
     case unknown(String)
 }

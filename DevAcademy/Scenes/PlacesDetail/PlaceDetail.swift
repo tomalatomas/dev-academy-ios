@@ -18,23 +18,26 @@ struct PlaceDetail: View {
     @State private var mapRegion: MKCoordinateRegion
     @State private var showDetail: Bool
     private let markers: [PlaceMarker]
-    
+
     init(feature: Feature, favorites: Binding<[Feature]>) {
         self.feature = feature
         self._favorites = favorites
-        self._mapRegion = State(initialValue: MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: feature.geometry.latitude, longitude: feature.geometry.longitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)))
-        self.markers = [PlaceMarker(location: MapMarker(coordinate: CLLocationCoordinate2D(latitude: feature.geometry.latitude, longitude: feature.geometry.longitude), tint: .red))]
+
+        let location = CLLocationCoordinate2D(latitude: feature.geometry.latitude,
+                                              longitude: feature.geometry.longitude)
+        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+        self._mapRegion = State(initialValue: MKCoordinateRegion(center: location, span: span))
+        self.markers = [PlaceMarker(location: MapMarker(coordinate: location, tint: .red))]
         self._showDetail = State(initialValue: false)
     }
 
-
     var body: some View {
         ZStack {
-            Map(coordinateRegion: $mapRegion, annotationItems: markers){ marker in
+            Map(coordinateRegion: $mapRegion, annotationItems: markers) { marker in
                 marker.location
             }
             .ignoresSafeArea(.all, edges: [.bottom])
-            
+
             Button {
                 showDetail.toggle()
             } label: {
@@ -47,7 +50,7 @@ struct PlaceDetail: View {
             .padding(.bottom, 20)
         }
         .navigationTitle(feature.properties.nazev)
-        .sheet(isPresented: $showDetail){
+        .sheet(isPresented: $showDetail) {
             PlaceDetailInfo(feature: feature)
                 .presentationDetents([.medium])
         }
@@ -61,8 +64,8 @@ struct PlaceDetail: View {
             }
         }
     }
-    
-    func onTapFavorite(){
+
+    func onTapFavorite() {
         if favorites.contains(feature) {
             favorites.removeAll(where: {$0.properties.ogcFid == feature.properties.ogcFid})
         } else {
@@ -76,5 +79,3 @@ struct PlaceDetail_Previews: PreviewProvider {
         PlaceDetail(feature: Features.mock.features.first!, favorites: .constant([]))
     }
 }
-
-
