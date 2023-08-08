@@ -12,10 +12,10 @@
 import SwiftUI
 import ActivityIndicatorView
 
-struct PlacesView: View {
-    @State var features: [Feature] = Features.mock.features
+struct Places: View {
+    @State var features: [Place] = Places.mock.features
     @State var showFavorites: Bool = false
-    @State var favorites: [Feature] = []
+    @State var favorites: [Place] = []
     
     var body: some View {
         NavigationStack {
@@ -61,7 +61,7 @@ struct PlacesView: View {
         }
     }
     
-    func onFavoriteTapped(feature: Feature) {
+    func onFavoriteTapped(feature: Place) {
         favorites.removeAll(where: {$0.properties.ogcFid == feature.properties.ogcFid})
     }
     
@@ -79,6 +79,6 @@ struct PlacesView: View {
 
 struct PlacesView_Previews: PreviewProvider {
     static var previews: some View {
-        PlacesView()
+        Places()
     }
 }

@@ -12,7 +12,7 @@
 import SwiftUI
 
 struct PlaceDetailInfo: View {
-    let feature: Feature
+    let feature: Place
     
     var body: some View {
         VStack {
@@ -48,6 +48,6 @@ struct PlaceDetailInfo: View {
 
 struct PlaceDetailInfo_Previews: PreviewProvider {
     static var previews: some View {
-        PlaceDetailInfo(feature: Features.mock.features.first!)
+        PlaceDetailInfo(feature: Places.mock.features.first!)
     }
 }

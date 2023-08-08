@@ -13,7 +13,7 @@ import SwiftUI
 
 struct PlaceCellView: View {
     // @Binding var feature: Feature
-    var feature: Feature
+    var feature: Place
 
     var body: some View {
         HStack {
@@ -47,6 +47,6 @@ struct PlaceCellView: View {
 struct PlaceCellView_Previews: PreviewProvider {
     static var previews: some View {
         // PlaceCellView(feature: .constant(Features.mock.features.first!))
-        PlaceCellView(feature: Features.mock.features.first!)
+        PlaceCellView(feature: Places.mock.features.first!)
     }
 }
