@@ -25,7 +25,7 @@ class DataService {
         }
         
         _ = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { [weak self] timer in
-            let mockData = DataService.mockData
+            let mockData = Features.mock
             self?.data = .success(mockData)
             action(self?.data ?? .success(mockData))
         }

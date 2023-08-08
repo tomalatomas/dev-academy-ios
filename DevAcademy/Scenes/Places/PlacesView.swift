@@ -10,32 +10,59 @@
 //
 
 import SwiftUI
+import ActivityIndicatorView
 
 struct PlacesView: View {
     @State var features: [Feature] = Features.mock.features
+    @State var showFavorites: Bool = false
+    @State var favorites: [Feature] = []
+    
     var body: some View {
         NavigationStack {
             Group {
                 if !features.isEmpty {
                     List(features, id:\.properties.ogcFid){ feature in
-                        PlaceCellView(feature: feature)
-                            .onTapGesture {
-                                onFeatureTapped(feature: feature)
-                            }
+                        NavigationLink {
+                            PlaceDetail(feature: feature, favorites: $favorites)
+                        } label: {
+                            PlaceCellView(feature: feature)
+                        }
                     }
                     .animation(.easeInOut, value: features)
                     .listStyle(.plain)
                 } else {
-                    ProgressView()
+                    ActivityIndicatorView(isVisible: .constant(true),
+                                          type: .opacityDots(count: 5, inset: 10))
+                    .frame(width: 100)
                 }
             }
             .navigationTitle("Kultůrmapa")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItemGroup(placement: .primaryAction) {
+                    Button {
+                        showFavorites.toggle()
+                    } label: {
+                        Image(systemName: "heart")
+                    }
+                }
+            }
         }
         .onAppear(perform: fetch)
+        .sheet(isPresented: $showFavorites){
+            List(favorites, id:\.properties.ogcFid) { feature in
+                PlaceCellView(feature: feature)
+                    .onTapGesture {
+                        onFavoriteTapped(feature: feature)
+                    }
+            }
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.visible)
+        }
     }
     
-    func onFeatureTapped(feature: Feature) {
-        features.removeAll(where: {$0.properties.ogcFid == feature.properties.ogcFid})
+    func onFavoriteTapped(feature: Feature) {
+        favorites.removeAll(where: {$0.properties.ogcFid == feature.properties.ogcFid})
     }
     
     func fetch() {
