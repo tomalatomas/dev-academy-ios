@@ -12,7 +12,6 @@
 import SwiftUI
 
 struct PlacesVM: DynamicProperty {
-    
     @State var showFavorites: Bool = false
     @EnvironmentObject private var placesObservable: PlacesObservable
     
@@ -35,6 +34,4 @@ struct PlacesVM: DynamicProperty {
     func addToFavorites(place: Place) {
         placesObservable.addToFavorites(place: place)
     }
-    
-    
 }

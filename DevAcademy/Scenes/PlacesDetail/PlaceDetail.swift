@@ -13,6 +13,7 @@ import SwiftUI
 import MapKit
 
 struct PlaceDetail: View {
+    @EnvironmentObject private var coordinator: Coordinator
     let placeDetailVM: PlaceDetailVM
 
     var body: some View {
@@ -35,7 +36,7 @@ struct PlaceDetail: View {
         }
         .navigationTitle(placeDetailVM.placeName)
         .sheet(isPresented: placeDetailVM.$showDetail){
-            PlaceDetailInfo(state: placeDetailVM)
+            coordinator.placeInfoScene(with: placeDetailVM)
                 .presentationDetents([.medium])
         }
     }
