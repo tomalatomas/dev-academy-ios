@@ -17,5 +17,3 @@ struct Properties {
     let druh: PossibleKind
     let nazev: String
 }
-
-

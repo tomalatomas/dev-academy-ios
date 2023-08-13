@@ -13,7 +13,7 @@ import SwiftUI
 
 struct PlaceDetailInfo: View {
     let feature: Feature
-    
+
     var body: some View {
         VStack {
             RoundedRectangle(cornerRadius: 3)
@@ -38,7 +38,6 @@ struct PlaceDetailInfo: View {
                 .fontWeight(.bold)
                 .foregroundColor(.secondary)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
                 .font(.body)
         }
         .padding(10)
