@@ -12,11 +12,9 @@
 import SwiftUI
 
 class PlacesObservable: ObservableObject {
-    
     @Published var places: [Place] = []
-    @State var favorites: [Place] = []
+    @Published var favorites: [Place] = []
     private let service = DataService.shared
-    
     
     func fetchPlaces() {
         service.fetchData { result in
@@ -30,6 +28,10 @@ class PlacesObservable: ObservableObject {
     }
     
     func addToFavorites(place: Place) {
-        favorites.removeAll(where: {$0.properties.ogcFid == place.properties.ogcFid})
+        if favorites.contains(place) {
+            favorites.removeAll(where: {$0.properties.ogcFid == place.properties.ogcFid})
+        } else {
+            favorites.append(place)
+        }
     }
 }
