@@ -10,7 +10,7 @@
 		A24109922A66C70A00F465FD /* Kinds.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24109912A66C70A00F465FD /* Kinds.swift */; };
 		A24109942A66CBCD00F465FD /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24109932A66CBCD00F465FD /* Properties.swift */; };
 		A24109962A66CC3E00F465FD /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24109952A66CC3E00F465FD /* Point.swift */; };
-		A24109982A66CC6B00F465FD /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24109972A66CC6B00F465FD /* Feature.swift */; };
+		A24109982A66CC6B00F465FD /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24109972A66CC6B00F465FD /* Place.swift */; };
 		A241099A2A66CD2500F465FD /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24109992A66CD2500F465FD /* DataService.swift */; };
 		A25658AA2A7932FC00536106 /* PlaceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25658A92A7932FC00536106 /* PlaceDetail.swift */; };
 		A25658AD2A7937D300536106 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = A25658AC2A7937D300536106 /* ActivityIndicatorView */; };
@@ -18,6 +18,10 @@
 		A25658B32A794A4000536106 /* PlaceDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25658B22A794A4000536106 /* PlaceDetailInfo.swift */; };
 		A26C4D422A7003760063FBCF /* PlacesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26C4D412A7003760063FBCF /* PlacesView.swift */; };
 		A26C4D442A70042D0063FBCF /* PlaceCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26C4D432A70042D0063FBCF /* PlaceCellView.swift */; };
+		A2C6006C2A8274E800647D8B /* PlaceDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C6006B2A8274E800647D8B /* PlaceDetailVM.swift */; };
+		A2C6006E2A8274F700647D8B /* PlacesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C6006D2A8274F700647D8B /* PlacesVM.swift */; };
+		A2C600712A82850400647D8B /* PlacesObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C600702A82850400647D8B /* PlacesObservable.swift */; };
+		A2C600732A82887500647D8B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C600722A82887500647D8B /* Coordinator.swift */; };
 		C05610492A5C78CA007FB970 /* DevAcademyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05610482A5C78CA007FB970 /* DevAcademyApp.swift */; };
 		C056104B2A5C78CA007FB970 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C056104A2A5C78CA007FB970 /* ContentView.swift */; };
 		C056104D2A5C78CB007FB970 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C056104C2A5C78CB007FB970 /* Assets.xcassets */; };
@@ -28,13 +32,17 @@
 		A24109912A66C70A00F465FD /* Kinds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kinds.swift; sourceTree = "<group>"; };
 		A24109932A66CBCD00F465FD /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
 		A24109952A66CC3E00F465FD /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
-		A24109972A66CC6B00F465FD /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
+		A24109972A66CC6B00F465FD /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		A24109992A66CD2500F465FD /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		A25658A92A7932FC00536106 /* PlaceDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetail.swift; sourceTree = "<group>"; };
 		A25658B02A79439300536106 /* PlaceMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceMarker.swift; sourceTree = "<group>"; };
 		A25658B22A794A4000536106 /* PlaceDetailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailInfo.swift; sourceTree = "<group>"; };
 		A26C4D412A7003760063FBCF /* PlacesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesView.swift; sourceTree = "<group>"; };
 		A26C4D432A70042D0063FBCF /* PlaceCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCellView.swift; sourceTree = "<group>"; };
+		A2C6006B2A8274E800647D8B /* PlaceDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailVM.swift; sourceTree = "<group>"; };
+		A2C6006D2A8274F700647D8B /* PlacesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesVM.swift; sourceTree = "<group>"; };
+		A2C600702A82850400647D8B /* PlacesObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesObservable.swift; sourceTree = "<group>"; };
+		A2C600722A82887500647D8B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		C05610452A5C78CA007FB970 /* DevAcademy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevAcademy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C05610482A5C78CA007FB970 /* DevAcademyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevAcademyApp.swift; sourceTree = "<group>"; };
 		C056104A2A5C78CA007FB970 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -60,7 +68,7 @@
 				A24109912A66C70A00F465FD /* Kinds.swift */,
 				A24109932A66CBCD00F465FD /* Properties.swift */,
 				A24109952A66CC3E00F465FD /* Point.swift */,
-				A24109972A66CC6B00F465FD /* Feature.swift */,
+				A24109972A66CC6B00F465FD /* Place.swift */,
 				A25658B02A79439300536106 /* PlaceMarker.swift */,
 			);
 			path = Model;
@@ -88,6 +96,7 @@
 			children = (
 				A26C4D412A7003760063FBCF /* PlacesView.swift */,
 				A26C4D432A70042D0063FBCF /* PlaceCellView.swift */,
+				A2C6006D2A8274F700647D8B /* PlacesVM.swift */,
 			);
 			path = Places;
 			sourceTree = "<group>";
@@ -97,8 +106,18 @@
 			children = (
 				A25658A92A7932FC00536106 /* PlaceDetail.swift */,
 				A25658B22A794A4000536106 /* PlaceDetailInfo.swift */,
+				A2C6006B2A8274E800647D8B /* PlaceDetailVM.swift */,
 			);
 			path = PlacesDetail;
+			sourceTree = "<group>";
+		};
+		A2C6006F2A8284A800647D8B /* Observables */ = {
+			isa = PBXGroup;
+			children = (
+				A2C600702A82850400647D8B /* PlacesObservable.swift */,
+				A2C600722A82887500647D8B /* Coordinator.swift */,
+			);
+			path = Observables;
 			sourceTree = "<group>";
 		};
 		C056103C2A5C78CA007FB970 = {
@@ -120,6 +139,7 @@
 		C05610472A5C78CA007FB970 /* DevAcademy */ = {
 			isa = PBXGroup;
 			children = (
+				A2C6006F2A8284A800647D8B /* Observables */,
 				A26C4D3E2A7002280063FBCF /* Service */,
 				A26C4D3D2A7000720063FBCF /* Scenes */,
 				A24109902A66C6DC00F465FD /* Model */,
@@ -237,7 +257,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A24109982A66CC6B00F465FD /* Feature.swift in Sources */,
+				A2C600732A82887500647D8B /* Coordinator.swift in Sources */,
+				A24109982A66CC6B00F465FD /* Place.swift in Sources */,
 				A241099A2A66CD2500F465FD /* DataService.swift in Sources */,
 				A25658B12A79439300536106 /* PlaceMarker.swift in Sources */,
 				A24109942A66CBCD00F465FD /* Properties.swift in Sources */,
@@ -246,6 +267,9 @@
 				A25658AA2A7932FC00536106 /* PlaceDetail.swift in Sources */,
 				A24109962A66CC3E00F465FD /* Point.swift in Sources */,
 				C056104B2A5C78CA007FB970 /* ContentView.swift in Sources */,
+				A2C600712A82850400647D8B /* PlacesObservable.swift in Sources */,
+				A2C6006C2A8274E800647D8B /* PlaceDetailVM.swift in Sources */,
+				A2C6006E2A8274F700647D8B /* PlacesVM.swift in Sources */,
 				C05610492A5C78CA007FB970 /* DevAcademyApp.swift in Sources */,
 				A26C4D422A7003760063FBCF /* PlacesView.swift in Sources */,
 				A24109922A66C70A00F465FD /* Kinds.swift in Sources */,

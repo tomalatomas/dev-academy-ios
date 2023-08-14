@@ -13,22 +13,21 @@ import SwiftUI
 import ActivityIndicatorView
 
 struct PlacesView: View {
-    @State var features: [Feature] = Features.mock.features
-    @State var showFavorites: Bool = false
-    @State var favorites: [Feature] = []
+    @EnvironmentObject private var coordinator: Coordinator
+    let placesVM: PlacesVM = PlacesVM()
 
     var body: some View {
         NavigationStack {
             Group {
-                if !features.isEmpty {
-                    List(features, id: \.properties.ogcFid) { feature in
+                if !placesVM.places.isEmpty {
+                    List(placesVM.places, id: \.properties.ogcFid) { place in
                         NavigationLink {
-                            PlaceDetail(feature: feature, favorites: $favorites)
+                            coordinator.placeDetailScene(for: place)
                         } label: {
-                            PlaceCellView(feature: feature)
+                            PlaceCellView(place: place)
                         }
                     }
-                    .animation(.easeInOut, value: features)
+                    .animation(.easeInOut, value: placesVM.places)
                     .listStyle(.plain)
                 } else {
                     ActivityIndicatorView(isVisible: .constant(true),
@@ -41,38 +40,23 @@ struct PlacesView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .primaryAction) {
                     Button {
-                        showFavorites.toggle()
+                        placesVM.showFavorites.toggle()
                     } label: {
                         Image(systemName: "heart")
                     }
                 }
             }
         }
-        .onAppear(perform: fetch)
-        .sheet(isPresented: $showFavorites) {
-            List(favorites, id: \.properties.ogcFid) { feature in
-                PlaceCellView(feature: feature)
+        .onAppear(perform: placesVM.fetch)
+        .sheet(isPresented: placesVM.$showFavorites) {
+            List(placesVM.favorites, id: \.properties.ogcFid) { place in
+                PlaceCellView(place: place)
                     .onTapGesture {
-                        onFavoriteTapped(feature: feature)
+                        placesVM.addToFavorites(place: place)
                     }
             }
                 .presentationDetents([.medium])
                 .presentationDragIndicator(.visible)
-        }
-    }
-
-    func onFavoriteTapped(feature: Feature) {
-        favorites.removeAll(where: {$0.properties.ogcFid == feature.properties.ogcFid})
-    }
-
-    func fetch() {
-        DataService.shared.fetchData { result in
-            switch result {
-            case .success(let features):
-                self.features = features.features
-            case .failure(let err):
-                print(err)
-            }
         }
     }
 }

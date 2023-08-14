@@ -1,5 +1,5 @@
 //
-// Filename: Feature.swift
+// Filename: Place.swift
 // Project: DevAcademy
 //
 // Developer:
@@ -11,24 +11,23 @@
 
 import Foundation
 
-struct Feature: Equatable {
+struct Place: Equatable {
     let geometry: Point
     let properties: Properties
 
-    static func == (lhs: Feature, rhs: Feature) -> Bool {
+    static func == (lhs: Place, rhs: Place) -> Bool {
         lhs.properties.ogcFid == rhs.properties.ogcFid
     }
-
 }
 
-struct Features {
-    let features: [Feature]
+struct Places {
+    let places: [Place]
 }
 
-extension Features {
-    static let mock: Features = Features(
-        features: [
-            Feature(
+extension Places {
+    static let mock: Places = Places(
+        places: [
+            Place(
                 geometry: Point(latitude: 49.1913, longitude: 16.6115),
                 properties: Properties(
                     ogcFid: 1,
@@ -37,7 +36,7 @@ extension Features {
                     nazev: "Národní divadlo Brno"
                 )
             ),
-            Feature(
+            Place(
                 geometry: Point(latitude: 49.2006, longitude: 16.6097),
                 properties: Properties(
                     ogcFid: 2,
@@ -46,7 +45,7 @@ extension Features {
                     nazev: "Kino Art Brno"
                 )
             ),
-            Feature(
+            Place(
                 geometry: Point(latitude: 49.2019, longitude: 16.6151),
                 properties: Properties(
                     ogcFid: 3,
@@ -55,7 +54,7 @@ extension Features {
                     nazev: "Moravské zemské muzeum"
                 )
             ),
-            Feature(
+            Place(
                 geometry: Point(latitude: 49.2079, longitude: 16.5938),
                 properties: Properties(
                     ogcFid: 4,
@@ -64,7 +63,7 @@ extension Features {
                     nazev: "BOUFOU Prostějovská Brno"
                 )
             ),
-            Feature(
+            Place(
                 geometry: Point(latitude: 49.2072, longitude: 16.6061),
                 properties: Properties(
                     ogcFid: 5,
@@ -73,7 +72,7 @@ extension Features {
                     nazev: "Kabinet múz"
                 )
             ),
-            Feature(
+            Place(
                 geometry: Point(latitude: 49.1894, longitude: 165602),
                 properties: Properties(
                     ogcFid: 6,
@@ -82,7 +81,7 @@ extension Features {
                     nazev: "Moravská zemská knihovna"
                 )
             ),
-            Feature(
+            Place(
                 geometry: Point(latitude: 49.1914, longitude: 16.6126),
                 properties: Properties(
                     ogcFid: 7,
@@ -91,7 +90,7 @@ extension Features {
                     nazev: "Janáčkovo divadlo"
                 )
             ),
-            Feature(
+            Place(
                 geometry: Point(latitude: 49.2182, longitude: 16.5893),
                 properties: Properties(
                     ogcFid: 8,
@@ -100,7 +99,7 @@ extension Features {
                     nazev: "Špilberk Brno"
                 )
             ),
-            Feature(
+            Place(
                 geometry: Point(latitude: 49.1920, longitude: 16.6071),
                 properties: Properties(
                     ogcFid: 9,
@@ -109,7 +108,7 @@ extension Features {
                     nazev: "Letní kino Lužánky"
                 )
             ),
-            Feature(
+            Place(
                 geometry: Point(latitude: 49.1925, longitude: 16.6112),
                 properties: Properties(
                     ogcFid: 10,
@@ -118,7 +117,7 @@ extension Features {
                     nazev: "Bar, který neexistuje"
                 )
             ),
-            Feature(
+            Place(
                 geometry: Point(latitude: 49.1925, longitude: 16.6112),
                 properties: Properties(
                     ogcFid: 11,
@@ -127,7 +126,7 @@ extension Features {
                     nazev: "Cinema City"
                 )
             ),
-            Feature(
+            Place(
                 geometry: Point(latitude: 49.1925, longitude: 16.6112),
                 properties: Properties(
                     ogcFid: 12,
@@ -136,7 +135,7 @@ extension Features {
                     nazev: "Univerzitní kino Scala"
                 )
             ),
-            Feature(
+            Place(
                 geometry: Point(latitude: 49.1925, longitude: 16.6112),
                 properties: Properties(
                     ogcFid: 13,
@@ -145,7 +144,7 @@ extension Features {
                     nazev: "Impact Hub"
                 )
             ),
-            Feature(
+            Place(
                 geometry: Point(latitude: 49.1925, longitude: 16.6112),
                 properties: Properties(
                     ogcFid: 14,
@@ -154,7 +153,7 @@ extension Features {
                     nazev: "Villa Tugendhat"
                 )
             ),
-            Feature(
+            Place(
                 geometry: Point(latitude: 49.1925, longitude: 16.6112),
                 properties: Properties(
                     ogcFid: 15,

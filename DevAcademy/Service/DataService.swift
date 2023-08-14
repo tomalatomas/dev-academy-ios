@@ -13,19 +13,19 @@ import Foundation
 
 class DataService {
     static var shared: DataService = DataService()
-    var data: Result<Features, Error>?
+    var data: Result<Places, Error>?
 
     private init() {
     }
 
-    func fetchData(action: @escaping (Result<Features, Error>) -> Void) {
+    func fetchData(action: @escaping (Result<Places, Error>) -> Void) {
         if let data {
             action(data)
             return
         }
 
         _ = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { [weak self] _ in
-            let mockData = Features.mock
+            let mockData = Places.mock
             self?.data = .success(mockData)
             action(self?.data ?? .success(mockData))
         }
@@ -33,5 +33,5 @@ class DataService {
 }
 
 extension DataService {
-    private static var mockData: Features = Features(features: [])
+    private static var mockData: Places = Places(places: [])
 }
