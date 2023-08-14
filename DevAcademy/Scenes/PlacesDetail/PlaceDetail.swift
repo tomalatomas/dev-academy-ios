@@ -18,11 +18,11 @@ struct PlaceDetail: View {
 
     var body: some View {
         ZStack {
-            Map(coordinateRegion: placeDetailVM.$mapRegion, annotationItems: placeDetailVM.markers){ marker in
+            Map(coordinateRegion: placeDetailVM.$mapRegion, annotationItems: placeDetailVM.markers) { marker in
                 marker.location
             }
             .ignoresSafeArea(.all, edges: [.bottom])
-            
+
             Button {
                 placeDetailVM.showDetail.toggle()
             } label: {
@@ -35,7 +35,7 @@ struct PlaceDetail: View {
             .padding(.bottom, 20)
         }
         .navigationTitle(placeDetailVM.placeName)
-        .sheet(isPresented: placeDetailVM.$showDetail){
+        .sheet(isPresented: placeDetailVM.$showDetail) {
             coordinator.placeInfoScene(with: placeDetailVM)
                 .presentationDetents([.medium])
         }
@@ -47,5 +47,3 @@ struct PlaceDetail_Previews: PreviewProvider {
         PlaceDetail(placeDetailVM: PlaceDetailVM(for: Places.mock.places[0]))
     }
 }
-
-

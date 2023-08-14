@@ -13,7 +13,7 @@ import SwiftUI
 
 struct PlaceDetailInfo: View {
     let state: PlaceDetailVM
-    
+
     var body: some View {
         VStack {
             RoundedRectangle(cornerRadius: 3)
@@ -43,4 +43,3 @@ struct PlaceDetailInfo: View {
         Spacer()
     }
 }
-

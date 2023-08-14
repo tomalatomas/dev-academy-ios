@@ -14,11 +14,10 @@ import Foundation
 struct Place: Equatable {
     let geometry: Point
     let properties: Properties
-    
+
     static func == (lhs: Place, rhs: Place) -> Bool {
         lhs.properties.ogcFid == rhs.properties.ogcFid
     }
-    
 }
 
 struct Places {

@@ -14,17 +14,17 @@ import Foundation
 class DataService {
     static var shared: DataService = DataService()
     var data: Result<Places, Error>?
-    
-    private init(){
+
+    private init() {
     }
-    
+
     func fetchData(action: @escaping (Result<Places, Error>) -> Void) {
         if let data {
             action(data)
             return
         }
-        
-        _ = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { [weak self] timer in
+
+        _ = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { [weak self] _ in
             let mockData = Places.mock
             self?.data = .success(mockData)
             action(self?.data ?? .success(mockData))

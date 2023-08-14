@@ -20,7 +20,7 @@ struct PlacesView: View {
         NavigationStack {
             Group {
                 if !placesVM.places.isEmpty {
-                    List(placesVM.places, id:\.properties.ogcFid){ place in
+                    List(placesVM.places, id: \.properties.ogcFid) { place in
                         NavigationLink {
                             coordinator.placeDetailScene(for: place)
                         } label: {
@@ -48,8 +48,8 @@ struct PlacesView: View {
             }
         }
         .onAppear(perform: placesVM.fetch)
-        .sheet(isPresented: placesVM.$showFavorites){
-            List(placesVM.favorites, id:\.properties.ogcFid) { place in
+        .sheet(isPresented: placesVM.$showFavorites) {
+            List(placesVM.favorites, id: \.properties.ogcFid) { place in
                 PlaceCellView(place: place)
                     .onTapGesture {
                         placesVM.addToFavorites(place: place)
