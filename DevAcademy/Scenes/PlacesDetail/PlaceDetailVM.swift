@@ -22,8 +22,9 @@ struct PlaceDetailVM: DynamicProperty {
         self.place = place
         self._showDetail = State(initialValue: false)
 
-        let location = CLLocationCoordinate2D(latitude: place.geometry.latitude,
-                                              longitude: place.geometry.longitude)
+        //TODO: Assign latitude and longitude from "place"
+        let location = CLLocationCoordinate2D(latitude: (Places.mock.places.first?.geometry!.latitude)!,
+                                              longitude: (Places.mock.places.first?.geometry!.longitude)!)
         let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         self._mapRegion = State(initialValue: MKCoordinateRegion(center: location, span: span))
         self.markers = [PlaceMarker(location: MapMarker(coordinate: location, tint: .red))]
@@ -37,7 +38,7 @@ struct PlaceDetailVM: DynamicProperty {
         place.properties.type.rawValue
     }
 
-    var placeImage: URL {
+    var placeImage: URL? {
         place.properties.obrId1
     }
 }
