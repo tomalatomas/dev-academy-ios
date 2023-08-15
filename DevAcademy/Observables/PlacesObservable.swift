@@ -25,9 +25,7 @@ class PlacesObservable: ObservableObject {
         do {
             let result = try await service.places()
             self.places = result.places
-            print("assigned")
         } catch {
-            print(error)
         }
     }
 
