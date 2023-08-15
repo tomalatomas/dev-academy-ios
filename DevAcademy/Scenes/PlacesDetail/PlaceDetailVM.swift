@@ -17,7 +17,7 @@ struct PlaceDetailVM: DynamicProperty {
     @State var showDetail: Bool
     @State var mapRegion: MKCoordinateRegion
     let markers: [PlaceMarker]
-    
+
     init(for place: Place) {
         self.place = place
         self._showDetail = State(initialValue: false)
@@ -28,15 +28,15 @@ struct PlaceDetailVM: DynamicProperty {
         self._mapRegion = State(initialValue: MKCoordinateRegion(center: location, span: span))
         self.markers = [PlaceMarker(location: MapMarker(coordinate: location, tint: .red))]
     }
-    
+
     var placeName: String {
-        place.properties.nazev
+        place.properties.name
     }
-    
+
     var placeType: String {
-        place.properties.druh.rawValue
+        place.properties.type.rawValue
     }
-    
+
     var placeImage: URL {
         place.properties.obrId1
     }

@@ -11,7 +11,7 @@
 
 import Foundation
 
-struct Place: Equatable {
+struct Place: Equatable, Codable {
     let geometry: Point
     let properties: Properties
 
@@ -20,7 +20,7 @@ struct Place: Equatable {
     }
 }
 
-struct Places {
+struct Places: Codable {
     let places: [Place]
 }
 
@@ -32,8 +32,8 @@ extension Places {
                 properties: Properties(
                     ogcFid: 1,
                     obrId1: URL(string: "https://picsum.photos/200")!,
-                    druh: .kind(.divadlo),
-                    nazev: "Národní divadlo Brno"
+                    type: .kind(.cinema),
+                    name: "Národní divadlo Brno"
                 )
             ),
             Place(
@@ -41,8 +41,8 @@ extension Places {
                 properties: Properties(
                     ogcFid: 2,
                     obrId1: URL(string: "https://picsum.photos/200")!,
-                    druh: .kind(.kino),
-                    nazev: "Kino Art Brno"
+                    type: .kind(.cinema),
+                    name: "Kino Art Brno"
                 )
             ),
             Place(
@@ -50,8 +50,8 @@ extension Places {
                 properties: Properties(
                     ogcFid: 3,
                     obrId1: URL(string: "https://picsum.photos/200")!,
-                    druh: .kind(.muzeum),
-                    nazev: "Moravské zemské muzeum"
+                    type: .kind(.museum),
+                    name: "Moravské zemské muzeum"
                 )
             ),
             Place(
@@ -59,8 +59,8 @@ extension Places {
                 properties: Properties(
                     ogcFid: 4,
                     obrId1: URL(string: "https://picsum.photos/200")!,
-                    druh: .kind(.kulturniCentrum),
-                    nazev: "BOUFOU Prostějovská Brno"
+                    type: .kind(.monument),
+                    name: "BOUFOU Prostějovská Brno"
                 )
             ),
             Place(
@@ -68,8 +68,8 @@ extension Places {
                 properties: Properties(
                     ogcFid: 5,
                     obrId1: URL(string: "https://picsum.photos/200")!,
-                    druh: .kind(.hudebniKlub),
-                    nazev: "Kabinet múz"
+                    type: .kind(.musicClub),
+                    name: "Kabinet múz"
                 )
             ),
             Place(
@@ -77,8 +77,8 @@ extension Places {
                 properties: Properties(
                     ogcFid: 6,
                     obrId1: URL(string: "https://picsum.photos/200")!,
-                    druh: .kind(.knihovna),
-                    nazev: "Moravská zemská knihovna"
+                    type: .kind(.library),
+                    name: "Moravská zemská knihovna"
                 )
             ),
             Place(
@@ -86,8 +86,8 @@ extension Places {
                 properties: Properties(
                     ogcFid: 7,
                     obrId1: URL(string: "https://picsum.photos/200")!,
-                    druh: .kind(.koncertniHala),
-                    nazev: "Janáčkovo divadlo"
+                    type: .kind(.concertHall),
+                    name: "Janáčkovo divadlo"
                 )
             ),
             Place(
@@ -95,8 +95,8 @@ extension Places {
                 properties: Properties(
                     ogcFid: 8,
                     obrId1: URL(string: "https://picsum.photos/200")!,
-                    druh: .kind(.kulturniPamátka),
-                    nazev: "Špilberk Brno"
+                    type: .kind(.monument),
+                    name: "Špilberk Brno"
                 )
             ),
             Place(
@@ -104,8 +104,8 @@ extension Places {
                 properties: Properties(
                     ogcFid: 9,
                     obrId1: URL(string: "https://picsum.photos/200")!,
-                    druh: .kind(.letniKino),
-                    nazev: "Letní kino Lužánky"
+                    type: .kind(.summerCinema),
+                    name: "Letní kino Lužánky"
                 )
             ),
             Place(
@@ -113,8 +113,8 @@ extension Places {
                 properties: Properties(
                     ogcFid: 10,
                     obrId1: URL(string: "https://picsum.photos/200")!,
-                    druh: .kind(.podnikSLulturnimProgramem),
-                    nazev: "Bar, který neexistuje"
+                    type: .kind(.cultureProgramme),
+                    name: "Bar, který neexistuje"
                 )
             ),
             Place(
@@ -122,8 +122,8 @@ extension Places {
                 properties: Properties(
                     ogcFid: 11,
                     obrId1: URL(string: "https://picsum.photos/200")!,
-                    druh: .kind(.kino),
-                    nazev: "Cinema City"
+                    type: .kind(.cinema),
+                    name: "Cinema City"
                 )
             ),
             Place(
@@ -131,8 +131,8 @@ extension Places {
                 properties: Properties(
                     ogcFid: 12,
                     obrId1: URL(string: "https://picsum.photos/200")!,
-                    druh: .kind(.kino),
-                    nazev: "Univerzitní kino Scala"
+                    type: .kind(.cinema),
+                    name: "Univerzitní kino Scala"
                 )
             ),
             Place(
@@ -140,8 +140,8 @@ extension Places {
                 properties: Properties(
                     ogcFid: 13,
                     obrId1: URL(string: "https://picsum.photos/200")!,
-                    druh: .kind(.hub),
-                    nazev: "Impact Hub"
+                    type: .kind(.hub),
+                    name: "Impact Hub"
                 )
             ),
             Place(
@@ -149,8 +149,8 @@ extension Places {
                 properties: Properties(
                     ogcFid: 14,
                     obrId1: URL(string: "https://picsum.photos/200")!,
-                    druh: .kind(.kulturniPamátka),
-                    nazev: "Villa Tugendhat"
+                    type: .kind(.monument),
+                    name: "Villa Tugendhat"
                 )
             ),
             Place(
@@ -158,8 +158,8 @@ extension Places {
                 properties: Properties(
                     ogcFid: 15,
                     obrId1: URL(string: "https://picsum.photos/200")!,
-                    druh: .kind(.vystaviste),
-                    nazev: "Brněnské výstaviště"
+                    type: .kind(.expo),
+                    name: "Brněnské výstaviště"
                 )
             )
         ]
