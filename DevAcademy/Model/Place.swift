@@ -12,16 +12,25 @@
 import Foundation
 
 struct Place: Equatable, Codable {
-    let geometry: Point
+    let geometry: Point?
     let properties: Properties
 
     static func == (lhs: Place, rhs: Place) -> Bool {
         lhs.properties.ogcFid == rhs.properties.ogcFid
     }
+
+    enum CodingKeys: String, CodingKey {
+        case properties = "attributes"
+        case geometry
+    }
 }
 
 struct Places: Codable {
     let places: [Place]
+
+    enum CodingKeys: String, CodingKey {
+        case places = "features"
+    }
 }
 
 extension Places {

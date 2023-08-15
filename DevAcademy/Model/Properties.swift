@@ -13,7 +13,7 @@ import Foundation
 
 struct Properties: Codable {
     let ogcFid: Int
-    let obrId1: URL
+    var obrId1: URL?
     let type: PossibleKind
     let name: String
     var web: String?
