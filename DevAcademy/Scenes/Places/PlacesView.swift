@@ -47,7 +47,9 @@ struct PlacesView: View {
                 }
             }
         }
-        .onAppear(perform: placesVM.fetch)
+        .task {
+            await placesVM.fetch()
+        }
         .sheet(isPresented: placesVM.$showFavorites) {
             List(placesVM.favorites, id: \.properties.ogcFid) { place in
                 PlaceCellView(place: place)

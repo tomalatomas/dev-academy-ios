@@ -11,7 +11,12 @@
 
 import Foundation
 
-struct Point {
+struct Point: Codable {
     let latitude: Double
     let longitude: Double
+
+    enum CodingKeys: String, CodingKey {
+        case latitude = "y"
+        case longitude = "x"
+    }
 }

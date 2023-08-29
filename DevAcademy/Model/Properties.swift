@@ -11,9 +11,23 @@
 
 import Foundation
 
-struct Properties {
+struct Properties: Codable {
     let ogcFid: Int
-    let obrId1: URL
-    let druh: PossibleKind
-    let nazev: String
+    var obrId1: URL?
+    let type: PossibleKind
+    let name: String
+    var web: String?
+    var phone: String?
+    var email: String?
+
+    enum CodingKeys: String, CodingKey {
+        case ogcFid = "ogc_fid"
+        case obrId1 = "obr_id1"
+        case phone =  "telefon"
+        case type = "druh"
+        case name = "nazev"
+
+        case web
+        case email
+    }
 }

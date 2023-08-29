@@ -11,24 +11,42 @@
 
 import Foundation
 
-enum Kind: String {
-    case divadlo = "Divadlo"
-    case galerie = "Galerie"
+enum Kind: String, Codable {
+    case theathre = "Divadlo"
+    case gallery = "Galerie"
     case hub = "Hub"
-    case hudebniKlub = "Hudebni klub"
-    case kino = "Kino"
-    case knihovna = "Knihovna"
-    case koncertniHala = "Koncertní hala"
-    case kulturniCentrum = "Kulturní centrum"
-    case kulturniPamátka = "Kulturní památka"
-    case letniKino = "Letní kino"
-    case muzeum = "Muzeum"
-    case podnikSLulturnimProgramem = "Podnik s kulturním programem"
-    case vystaviste = "Výstaviště"
-    case ostatni = "Ostatní"
+    case musicClub = "Hudebni klub"
+    case cinema = "Kino"
+    case library = "Knihovna"
+    case concertHall = "Koncertní hala"
+    case cultureCentre = "Kulturní centrum"
+    case monument = "Kulturní památka"
+    case summerCinema = "Letní kino"
+    case museum = "Muzeum"
+    case cultureProgramme = "Podnik s kulturním programem"
+    case expo = "Výstaviště"
+    case other = "Ostatní"
+
+    enum CodingKeys: String, CodingKey {
+        case cinema = "kino"
+        case theathre = "divadlo"
+        case gallery = "galerie"
+        case musicClub = "hudebniKlub"
+        case library = "knihovna"
+        case concertHall = "koncertniHala"
+        case cultureCentre = "kulturniCentrum"
+        case monument = "kulturniPamátka"
+        case summerCinema = "letniKino"
+        case museum = "muzeum"
+        case cultureProgramme = "podnikSLulturnimProgramem"
+        case expo = "vystaviste"
+        case other = "ostatni"
+        case hub
+
+    }
 }
 
-enum PossibleKind: RawRepresentable {
+enum PossibleKind: RawRepresentable, Codable {
     init?(rawValue: String) {
         if let kindCase = Kind(rawValue: rawValue) {
             self = .kind(kindCase)

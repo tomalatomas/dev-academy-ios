@@ -31,11 +31,11 @@ struct PlaceCellView: View {
                 }
             )
             VStack(alignment: .leading) {
-                Text(place.properties.nazev)
+                Text(place.properties.name)
                     .font(.title2)
                     .fontWeight(.semibold)
                     .lineLimit(1)
-                Text(place.properties.druh.rawValue)
+                Text(place.properties.type.rawValue)
                     .foregroundColor(.secondary)
                     .font(.subheadline)
             }
