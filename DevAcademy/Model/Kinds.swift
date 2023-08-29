@@ -12,7 +12,7 @@
 import Foundation
 
 enum Kind: String, Codable {
-    case theathre = "Divadlo"
+    case theatre = "Divadlo"
     case gallery = "Galerie"
     case hub = "Hub"
     case musicClub = "Hudebni klub"
@@ -29,7 +29,7 @@ enum Kind: String, Codable {
 
     enum CodingKeys: String, CodingKey {
         case cinema = "kino"
-        case theathre = "divadlo"
+        case theatre = "divadlo"
         case gallery = "galerie"
         case musicClub = "hudebniKlub"
         case library = "knihovna"
