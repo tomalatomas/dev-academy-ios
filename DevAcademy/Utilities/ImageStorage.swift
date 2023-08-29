@@ -22,7 +22,11 @@ class ImageStorage {
     /// Initializer first checks, whether folder for `defaultPath` exists. If not, it creates a new one.
     init() {
         if !FileManager.default.fileExists(atPath: defaultPath.path(percentEncoded: false)) {
-            try? FileManager.default.createDirectory(at: defaultPath, withIntermediateDirectories: true)
+            do {
+                try FileManager.default.createDirectory(at: defaultPath, withIntermediateDirectories: true)
+            } catch {
+                print("Create dir error: \(error)")
+            }
         }
     }
 
@@ -47,9 +51,12 @@ class ImageStorage {
     /// - Parameter url: The URL of the request that would be executed upon the server.
     /// - Returns: Image if exists.
     func loadImage(for url: URL) -> Image? {
-        let hashedPath = hash(of: url)
+        let hashedURL = hash(of: url)
+        let hashedPath = defaultPath.appendingPathComponent(hashedURL).path(percentEncoded: false)
 
-        if !FileManager.default.fileExists(atPath: hashedPath) { return nil }
+        if !FileManager.default.fileExists(atPath: hashedPath) {
+            return nil
+        }
 
         guard let data = try? Data(contentsOf: URL(fileURLWithPath: hashedPath)) else { return nil }
 
@@ -70,7 +77,8 @@ class ImageStorage {
     ///   - image: Image to be stored
     ///   - url: The URL that was executed upon the server to get this image.
     func update(image: UIImage, at url: URL) {
-        let hashedPath = hash(of: url)
+        let hashedURL = hash(of: url)
+        let hashedPath = defaultPath.appendingPathComponent(hashedURL).path(percentEncoded: false)
 
         if FileManager.default.fileExists(atPath: hashedPath) {
             try? FileManager.default.removeItem(atPath: hashedPath)
@@ -78,6 +86,10 @@ class ImageStorage {
 
         guard let bytes = image.jpegData(compressionQuality: 1.0) else { return }
 
-        try? bytes.write(to: URL(fileURLWithPath: hashedPath))
+        do {
+            try bytes.write(to: URL(fileURLWithPath: hashedPath))
+        } catch {
+            print("WRITE ERR: \(error)")
+        }
     }
 }

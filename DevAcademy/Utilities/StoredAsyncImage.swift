@@ -45,8 +45,12 @@ struct StoredAsyncImage<I: View, P: View>: View {
     /// If not, download the image via `performURLFetch()` function, store it in the cache and in the `image` state vriable.
     private func loadImage() async {
         guard let img = ImageStorage.shared.loadImage(for: url) else {
-            let imgFetched = try? await performURLFetch().1
-            image = imgFetched
+            let imgFetched = try? await performURLFetch()
+            image = imgFetched?.1
+            if let imgToCache = imgFetched?.0 {
+                ImageStorage.shared.update(image: imgToCache, at: url)
+            }
+
             return
         }
 
