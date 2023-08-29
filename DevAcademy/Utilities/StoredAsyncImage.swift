@@ -17,7 +17,6 @@ enum StoredAsyncImageError: Error {
 }
 
 struct StoredAsyncImage<I: View, P: View>: View {
-
     @State private var image: Image?
 
     private let url: URL
@@ -45,7 +44,13 @@ struct StoredAsyncImage<I: View, P: View>: View {
     /// If so, store it in `image` state variable.
     /// If not, download the image via `performURLFetch()` function, store it in the cache and in the `image` state vriable.
     private func loadImage() async {
-        fatalError("TODO: Implement me")
+        guard let img = ImageStorage.shared.loadImage(for: url) else {
+            let imgFetched = try? await performURLFetch().1
+            image = imgFetched
+            return
+        }
+
+        image = img
     }
 
     /// The body should only show one of either states:
@@ -53,6 +58,13 @@ struct StoredAsyncImage<I: View, P: View>: View {
     /// If `image` state variable is filled, present image using `imageBuilder`
     /// If `image` state variable is empty, present `placeholder` and execute `loadImage()` function in the `.task` modifier.
     var body: some View {
-        fatalError("TODO: Implement me")
+        if let img = image {
+            imageBuilder(img)
+        } else {
+            placeholderBuilder()
+            .task {
+                await loadImage()
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@
 import SwiftUI
 import CryptoKit
 
-private class ImageStorage {
+class ImageStorage {
     static let shared: ImageStorage = ImageStorage()
 
     /// Select an folder in this application bundle. We want ideally an "Application Support" directory. In this directory, we want to store our images in subdirectory called "imageCache",
