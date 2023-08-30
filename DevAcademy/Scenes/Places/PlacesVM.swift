@@ -35,8 +35,4 @@ struct PlacesVM: DynamicProperty {
     func fetch() async {
         await placesObservable.fetchPlaces()
     }
-
-    func addToFavorites(place: Place) {
-        placesObservable.addToFavorites(place: place)
-    }
 }

@@ -50,16 +50,6 @@ struct PlacesView: View {
         .task {
             await placesVM.fetch()
         }
-        .sheet(isPresented: placesVM.$showFavorites) {
-            List(placesVM.favorites, id: \.properties.ogcFid) { place in
-                PlaceCellView(place: place)
-                    .onTapGesture {
-                        placesVM.addToFavorites(place: place)
-                    }
-            }
-                .presentationDetents([.medium])
-                .presentationDragIndicator(.visible)
-        }
     }
 }
 

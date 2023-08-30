@@ -35,6 +35,15 @@ struct PlaceDetail: View {
             .padding(.bottom, 20)
         }
         .navigationTitle(placeDetailVM.placeName)
+        .toolbar {
+            ToolbarItemGroup(placement: .primaryAction) {
+                Button {
+                    placeDetailVM.isFavorite.wrappedValue.toggle()
+                } label: {
+                    Image(systemName: placeDetailVM.isFavorite.wrappedValue ? "heart.fill" : "heart")
+                }
+            }
+        }
         .sheet(isPresented: placeDetailVM.$showDetail) {
             coordinator.placeInfoScene(with: placeDetailVM)
                 .presentationDetents([.medium])

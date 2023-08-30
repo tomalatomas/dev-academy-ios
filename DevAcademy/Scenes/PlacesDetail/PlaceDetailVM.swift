@@ -9,13 +9,14 @@
 // Description:
 //
 
-import SwiftUI
 import MapKit
+import SwiftUI
 
 struct PlaceDetailVM: DynamicProperty {
-    var place: Place
     @State var showDetail: Bool
     @State var mapRegion: MKCoordinateRegion
+    @EnvironmentObject private var placesObservable: PlacesObservable
+    var place: Place
     let markers: [PlaceMarker]
 
     init(for place: Place) {
@@ -40,5 +41,13 @@ struct PlaceDetailVM: DynamicProperty {
 
     var placeImage: URL? {
         place.properties.obrId1
+    }
+
+    var isFavorite: Binding<Bool> {
+        Binding {
+            placesObservable.isFavorited(place: place)
+        } set: { value in
+            placesObservable.setFavorite(place: place, value: value)
+        }
     }
 }

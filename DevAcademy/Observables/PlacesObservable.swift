@@ -14,6 +14,11 @@ import SwiftUI
 class PlacesObservable: ObservableObject {
     @Published var places: [Place] = []
     private let service: PlacesService
+
+    init(with service: PlacesService) {
+        self.service = service
+    }
+
     var rawPlaces: [Place] = [] {
         didSet {
             updatePlaces()
@@ -21,15 +26,11 @@ class PlacesObservable: ObservableObject {
     }
 
     private(set) var favorites: [Int]? {
-        get { UserDefaults.standard.array(forKey: "favourites") as? [Int] }
+        get { (UserDefaults.standard.array(forKey: "favourites") ?? []) as? [Int] }
         set {
             UserDefaults.standard.set(newValue, forKey: "favourites")
             updatePlaces()
         }
-    }
-
-    init(with service: PlacesService) {
-        self.service = service
     }
 
     @MainActor
@@ -50,12 +51,17 @@ class PlacesObservable: ObservableObject {
         return false
     }
 
-    func addToFavorites(place: Place) {
-        if isFavorited(place: place) {
-            favorites?.removeAll(where: {$0 == place.properties.ogcFid})
+    func setFavorite(place: Place, value: Bool) {
+        if value {
+            if !isFavorited(place: place) {
+                // Add to favorites if not added yet
+                favorites?.append(place.properties.ogcFid)
+            }
         } else {
-            favorites?.append(place.properties.ogcFid)
+            // Remove all occurences
+            favorites?.removeAll(where: {$0 == place.properties.ogcFid})
         }
+        print("value: \(value), \(place.properties.name) favorite: \(isFavorited(place: place))")
     }
 
     func updatePlaces() {
