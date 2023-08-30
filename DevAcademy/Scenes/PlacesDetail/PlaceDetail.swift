@@ -14,11 +14,11 @@ import MapKit
 
 struct PlaceDetail: View {
     @EnvironmentObject private var coordinator: Coordinator
-    let placeDetailVM: PlaceDetailVM
+    @ObservedObject var placeDetailVM: PlaceDetailVM
 
     var body: some View {
         ZStack {
-            Map(coordinateRegion: placeDetailVM.$mapRegion, annotationItems: placeDetailVM.markers) { marker in
+            Map(coordinateRegion: $placeDetailVM.mapRegion, annotationItems: placeDetailVM.markers) { marker in
                 marker.location
             }
             .ignoresSafeArea(.all, edges: [.bottom])
@@ -44,15 +44,9 @@ struct PlaceDetail: View {
                 }
             }
         }
-        .sheet(isPresented: placeDetailVM.$showDetail) {
+        .sheet(isPresented: $placeDetailVM.showDetail) {
             coordinator.placeInfoScene(with: placeDetailVM)
                 .presentationDetents([.medium])
         }
-    }
-}
-
-struct PlaceDetail_Previews: PreviewProvider {
-    static var previews: some View {
-        PlaceDetail(placeDetailVM: PlaceDetailVM(for: Places.mock.places[0]))
     }
 }

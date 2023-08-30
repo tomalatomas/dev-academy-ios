@@ -14,6 +14,7 @@ import ActivityIndicatorView
 
 struct PlacesView: View {
     @EnvironmentObject private var coordinator: Coordinator
+    @EnvironmentObject private var placesObservable: PlacesObservable
     let placesVM: PlacesVM = PlacesVM()
 
     var body: some View {
@@ -22,7 +23,7 @@ struct PlacesView: View {
                 if !placesVM.places.isEmpty {
                     List(placesVM.places, id: \.properties.ogcFid) { place in
                         NavigationLink {
-                            coordinator.placeDetailScene(for: place)
+                            coordinator.placeDetailScene(for: place, placeManager: placesObservable)
                         } label: {
                             PlaceCellView(place: place)
                         }

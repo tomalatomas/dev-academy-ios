@@ -61,7 +61,6 @@ class PlacesObservable: ObservableObject {
             // Remove all occurences
             favorites?.removeAll(where: {$0 == place.properties.ogcFid})
         }
-        print("value: \(value), \(place.properties.name) favorite: \(isFavorited(place: place))")
     }
 
     func updatePlaces() {
