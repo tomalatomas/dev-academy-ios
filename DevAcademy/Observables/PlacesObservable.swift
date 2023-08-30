@@ -37,7 +37,7 @@ class PlacesObservable: ObservableObject {
     func fetchPlaces() async {
         do {
             let result = try await service.places()
-            self.places = result.places
+            self.rawPlaces = result.places
         } catch {
         }
     }
