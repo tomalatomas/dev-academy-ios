@@ -18,7 +18,7 @@ struct PlaceDetail: View {
 
     var body: some View {
         ZStack {
-            Map(coordinateRegion: $placeDetailVM.mapRegion, annotationItems: placeDetailVM.markers) { marker in
+            Map(coordinateRegion: $placeDetailVM.mapRegion, userTrackingMode: .constant(.follow), annotationItems: placeDetailVM.markers) { marker in
                 marker.location
             }
             .ignoresSafeArea(.all, edges: [.bottom])
