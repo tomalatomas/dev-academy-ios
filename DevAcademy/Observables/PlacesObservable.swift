@@ -10,15 +10,37 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 class PlacesObservable: ObservableObject {
     @Published var places: [Place] = []
     private let service: PlacesService
     private let location: UserLocationService
+    private var lastUserLocation: CLLocation?
 
     init(with service: PlacesService, location: UserLocationService) {
         self.service = service
         self.location = location
+
+        self.location.listenDidUpdateLocation { [weak self] location in
+            guard let userLocation = location.first else { return }
+            guard let toUpdate = self?.shouldUpdate(location: userLocation) else { return }
+            if toUpdate {
+                print("Update")
+                self?.lastUserLocation = userLocation
+                self?.updatePlaces()
+            }
+        }
+
+        self.location.listenDidUpdateStatus { [weak self] status in
+            switch status {
+            case .notDetermined:
+                self?.location.requestAuthorization()
+            case .authorizedWhenInUse, .authorizedAlways:
+                self?.beginLocationUpdates()
+            default: break
+            }
+        }
     }
 
     var rawPlaces: [Place] = [] {
@@ -66,15 +88,41 @@ class PlacesObservable: ObservableObject {
     }
 
     func updatePlaces() {
-        places.append(contentsOf: rawPlaces)
+        var updatedPlaces = rawPlaces
+
+        if let lastUserLocation {
+            updatedPlaces.sort { lPlace, rPlace in
+                guard let rPoint = rPlace.geometry?.location else {
+                    return false
+                }
+                guard let lPoint = lPlace.geometry?.location else {
+                    return true
+                }
+
+                return lastUserLocation.distance(from: lPoint).magnitude < lastUserLocation.distance(from: rPoint).magnitude
+            }
+        }
 
         if let fav = favorites {
             for id in fav {
-                if let index = places.firstIndex(where: {$0.properties.ogcFid == id}) {
-                    let element = places.remove(at: index)
-                    places.insert(element, at: 0)
+                if let index = updatedPlaces.firstIndex(where: {$0.properties.ogcFid == id}) {
+                    let element = updatedPlaces.remove(at: index)
+                    updatedPlaces.insert(element, at: 0)
                 }
             }
+            self.places = updatedPlaces
         }
+    }
+
+    func beginLocationUpdates() {
+        self.location.startUpdatingLocation()
+    }
+
+    func shouldUpdate(location: CLLocation) -> Bool {
+        guard let lastLocation = lastUserLocation else {
+            return true
+        }
+
+        return lastLocation.distance(from: location).magnitude > 100
     }
 }
