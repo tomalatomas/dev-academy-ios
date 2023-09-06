@@ -16,7 +16,7 @@ struct PlaceCellView: View {
 
     var body: some View {
         HStack {
-            StoredAsyncImage(url: place.properties.obrId1!) { image in
+            StoredAsyncImage(url: place.properties.obrId1) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fill)

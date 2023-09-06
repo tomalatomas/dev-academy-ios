@@ -19,17 +19,17 @@ enum StoredAsyncImageError: Error {
 struct StoredAsyncImage<I: View, P: View>: View {
     @State private var image: Image?
 
-    private let url: URL
+    private let url: URL?
     private let imageBuilder: (Image) -> I
     private let placeholderBuilder: () -> P
 
-    init(url: URL, image: @escaping (Image) -> I, placeholder: @escaping () -> P) {
+    init(url: URL?, image: @escaping (Image) -> I, placeholder: @escaping () -> P) {
         self.url = url
         self.imageBuilder = image
         self.placeholderBuilder = placeholder
     }
 
-    private func performURLFetch() async throws -> (UIImage, Image) {
+    private func performURLFetch(url: URL) async throws -> (UIImage, Image) {
         let (data, _) = try await URLSession.shared.data(from: url)
         guard let uiimage = UIImage(data: data) else {
             throw StoredAsyncImageError.decodingFailed
@@ -44,8 +44,9 @@ struct StoredAsyncImage<I: View, P: View>: View {
     /// If so, store it in `image` state variable.
     /// If not, download the image via `performURLFetch()` function, store it in the cache and in the `image` state vriable.
     private func loadImage() async {
+        guard let url else { return }
         guard let img = ImageStorage.shared.loadImage(for: url) else {
-            let imgFetched = try? await performURLFetch()
+            let imgFetched = try? await performURLFetch(url: url)
             image = imgFetched?.1
             if let imgToCache = imgFetched?.0 {
                 ImageStorage.shared.update(image: imgToCache, at: url)
