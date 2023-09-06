@@ -14,9 +14,11 @@ import SwiftUI
 class PlacesObservable: ObservableObject {
     @Published var places: [Place] = []
     private let service: PlacesService
+    private let location: UserLocationService
 
-    init(with service: PlacesService) {
+    init(with service: PlacesService, location: UserLocationService) {
         self.service = service
+        self.location = location
     }
 
     var rawPlaces: [Place] = [] {

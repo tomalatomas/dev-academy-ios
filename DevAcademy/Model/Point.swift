@@ -10,6 +10,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct Point: Codable {
     let latitude: Double
@@ -18,5 +19,11 @@ struct Point: Codable {
     enum CodingKeys: String, CodingKey {
         case latitude = "y"
         case longitude = "x"
+    }
+}
+
+extension Point {
+    var location: CLLocation {
+        CLLocation(latitude: latitude, longitude: longitude)
     }
 }
