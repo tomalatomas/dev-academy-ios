@@ -17,6 +17,9 @@
 		A25658B32A794A4000536106 /* PlaceDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25658B22A794A4000536106 /* PlaceDetailInfo.swift */; };
 		A26C4D422A7003760063FBCF /* PlacesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26C4D412A7003760063FBCF /* PlacesView.swift */; };
 		A26C4D442A70042D0063FBCF /* PlaceCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26C4D432A70042D0063FBCF /* PlaceCellView.swift */; };
+		A28AA63C2AA75BFA00B44D98 /* UserLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28AA63B2AA75BFA00B44D98 /* UserLocationService.swift */; };
+		A29E95842A9E2736000BD07F /* ImageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29E95832A9E2736000BD07F /* ImageStorage.swift */; };
+		A29E95862A9E2749000BD07F /* StoredAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29E95852A9E2749000BD07F /* StoredAsyncImage.swift */; };
 		A2A8B31B2A8BBFAF002A99FC /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A8B31A2A8BBFAF002A99FC /* APIError.swift */; };
 		A2C6006C2A8274E800647D8B /* PlaceDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C6006B2A8274E800647D8B /* PlaceDetailVM.swift */; };
 		A2C6006E2A8274F700647D8B /* PlacesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C6006D2A8274F700647D8B /* PlacesVM.swift */; };
@@ -39,6 +42,10 @@
 		A25658B22A794A4000536106 /* PlaceDetailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailInfo.swift; sourceTree = "<group>"; };
 		A26C4D412A7003760063FBCF /* PlacesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesView.swift; sourceTree = "<group>"; };
 		A26C4D432A70042D0063FBCF /* PlaceCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCellView.swift; sourceTree = "<group>"; };
+		A28AA63B2AA75BFA00B44D98 /* UserLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationService.swift; sourceTree = "<group>"; };
+		A28AA63D2AA8D13200B44D98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A29E95832A9E2736000BD07F /* ImageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorage.swift; sourceTree = "<group>"; };
+		A29E95852A9E2749000BD07F /* StoredAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredAsyncImage.swift; sourceTree = "<group>"; };
 		A2A8B31A2A8BBFAF002A99FC /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		A2C6006B2A8274E800647D8B /* PlaceDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailVM.swift; sourceTree = "<group>"; };
 		A2C6006D2A8274F700647D8B /* PlacesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesVM.swift; sourceTree = "<group>"; };
@@ -90,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				A2EE562B2A8BBA9E006BBD98 /* PlacesService.swift */,
+				A28AA63B2AA75BFA00B44D98 /* UserLocationService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -112,6 +120,15 @@
 				A2C6006B2A8274E800647D8B /* PlaceDetailVM.swift */,
 			);
 			path = PlacesDetail;
+			sourceTree = "<group>";
+		};
+		A29E95822A9E2709000BD07F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A29E95832A9E2736000BD07F /* ImageStorage.swift */,
+				A29E95852A9E2749000BD07F /* StoredAsyncImage.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		A2C6006F2A8284A800647D8B /* Observables */ = {
@@ -142,6 +159,8 @@
 		C05610472A5C78CA007FB970 /* DevAcademy */ = {
 			isa = PBXGroup;
 			children = (
+				A28AA63D2AA8D13200B44D98 /* Info.plist */,
+				A29E95822A9E2709000BD07F /* Utilities */,
 				A24109902A66C6DC00F465FD /* Model */,
 				A2C6006F2A8284A800647D8B /* Observables */,
 				A26C4D3E2A7002280063FBCF /* Service */,
@@ -251,7 +270,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  git status --porcelain | grep -v '^ \\?D' | cut -c 4- | sed 's/.* -> //' | tr -d '\"' | while read file \n    do\n        if [[ \"$file\" == *.swift ]]; then\n            swiftlint --fix \"$file\"\n            swiftlint \"$file\"\n        fi\n    done\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n    swiftlint --fix \"$file\"\n    swiftlint \"$file\"\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -262,9 +281,11 @@
 			files = (
 				A2C600732A82887500647D8B /* Coordinator.swift in Sources */,
 				A24109982A66CC6B00F465FD /* Place.swift in Sources */,
+				A28AA63C2AA75BFA00B44D98 /* UserLocationService.swift in Sources */,
 				A25658B12A79439300536106 /* PlaceMarker.swift in Sources */,
 				A24109942A66CBCD00F465FD /* Properties.swift in Sources */,
 				A2EE562C2A8BBA9E006BBD98 /* PlacesService.swift in Sources */,
+				A29E95842A9E2736000BD07F /* ImageStorage.swift in Sources */,
 				A25658B32A794A4000536106 /* PlaceDetailInfo.swift in Sources */,
 				A26C4D442A70042D0063FBCF /* PlaceCellView.swift in Sources */,
 				A25658AA2A7932FC00536106 /* PlaceDetail.swift in Sources */,
@@ -277,6 +298,7 @@
 				A26C4D422A7003760063FBCF /* PlacesView.swift in Sources */,
 				A24109922A66C70A00F465FD /* Kinds.swift in Sources */,
 				A2A8B31B2A8BBFAF002A99FC /* APIError.swift in Sources */,
+				A29E95862A9E2749000BD07F /* StoredAsyncImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +429,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"DevAcademy/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DevAcademy/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -436,6 +459,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"DevAcademy/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DevAcademy/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

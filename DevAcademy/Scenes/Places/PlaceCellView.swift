@@ -16,20 +16,16 @@ struct PlaceCellView: View {
 
     var body: some View {
         HStack {
-            AsyncImage(
-                url: place.properties.obrId1,
-                content: { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: 60, maxHeight: 60)
-                        .cornerRadius(8)
-                        .shadow(radius: 4)
-                },
-                placeholder: {
-                    ProgressView()
-                }
-            )
+            StoredAsyncImage(url: place.properties.obrId1) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 60, height: 60)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .shadow(radius: 4)
+            } placeholder: {
+                ProgressView()
+            }
             VStack(alignment: .leading) {
                 Text(place.properties.name)
                     .font(.title2)

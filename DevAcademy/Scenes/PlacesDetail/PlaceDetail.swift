@@ -18,7 +18,7 @@ struct PlaceDetail: View {
 
     var body: some View {
         ZStack {
-            Map(coordinateRegion: placeDetailVM.$mapRegion, annotationItems: placeDetailVM.markers) { marker in
+            Map(coordinateRegion: .constant(placeDetailVM.mapRegion), userTrackingMode: .constant(.follow), annotationItems: placeDetailVM.markers) { marker in
                 marker.location
             }
             .ignoresSafeArea(.all, edges: [.bottom])
@@ -35,15 +35,18 @@ struct PlaceDetail: View {
             .padding(.bottom, 20)
         }
         .navigationTitle(placeDetailVM.placeName)
+        .toolbar {
+            ToolbarItemGroup(placement: .primaryAction) {
+                Button {
+                    placeDetailVM.isFavorite.wrappedValue.toggle()
+                } label: {
+                    Image(systemName: placeDetailVM.isFavorite.wrappedValue ? "heart.fill" : "heart")
+                }
+            }
+        }
         .sheet(isPresented: placeDetailVM.$showDetail) {
             coordinator.placeInfoScene(with: placeDetailVM)
                 .presentationDetents([.medium])
         }
-    }
-}
-
-struct PlaceDetail_Previews: PreviewProvider {
-    static var previews: some View {
-        PlaceDetail(placeDetailVM: PlaceDetailVM(for: Places.mock.places[0]))
     }
 }
