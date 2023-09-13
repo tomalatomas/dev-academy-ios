@@ -24,10 +24,10 @@ struct PlaceDetailInfo: View {
                 content: { image in
                     image
                         .resizable()
-                        .frame(maxHeight: 200)
-                        .aspectRatio(contentMode: .fill)
+                        .aspectRatio(contentMode: .fit)
                         .cornerRadius(13)
                         .shadow(radius: 5)
+                        .clipped()
                 },
                 placeholder: {
                     ProgressView()

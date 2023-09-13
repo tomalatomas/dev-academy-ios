@@ -20,7 +20,12 @@ struct PlacesVM: DynamicProperty {
     }
 
     var favorites: [Place] {
-        placesObservable.favorites
+        placesObservable.places.filter { place in
+            if let favs = placesObservable.favorites {
+                return favs.contains(where: {$0 == place.properties.ogcFid })
+            }
+            return false
+        }
     }
 
     var placesAreLoaded: Bool {
@@ -29,9 +34,5 @@ struct PlacesVM: DynamicProperty {
 
     func fetch() async {
         await placesObservable.fetchPlaces()
-    }
-
-    func addToFavorites(place: Place) {
-        placesObservable.addToFavorites(place: place)
     }
 }
