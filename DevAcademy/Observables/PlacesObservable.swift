@@ -37,14 +37,13 @@ class PlacesObservable: ObservableObject {
     func fetchPlaces() async {
         do {
             let result = try await service.places()
-            self.rawPlaces = result.places
-        } catch {
-        }
+            rawPlaces = result.places
+        } catch {}
     }
 
     func isFavorited(place: Place) -> Bool {
         if let fav = favorites {
-            if fav.contains(where: {$0 == place.properties.ogcFid}) {
+            if fav.contains(where: { $0 == place.properties.ogcFid }) {
                 return true
             }
         }
@@ -59,20 +58,22 @@ class PlacesObservable: ObservableObject {
             }
         } else {
             // Remove all occurences
-            favorites?.removeAll(where: {$0 == place.properties.ogcFid})
+            favorites?.removeAll(where: { $0 == place.properties.ogcFid })
         }
     }
 
     func updatePlaces() {
-        places.append(contentsOf: rawPlaces)
+        var updatedPlaces = rawPlaces
 
         if let fav = favorites {
             for id in fav {
-                if let index = places.firstIndex(where: {$0.properties.ogcFid == id}) {
-                    let element = places.remove(at: index)
-                    places.insert(element, at: 0)
+                if let index = updatedPlaces.firstIndex(where: { $0.properties.ogcFid == id }) {
+                    let element = updatedPlaces.remove(at: index)
+                    updatedPlaces.insert(element, at: 0)
                 }
             }
+
+            places = updatedPlaces
         }
     }
 }

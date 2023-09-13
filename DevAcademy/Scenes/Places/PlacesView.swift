@@ -23,7 +23,7 @@ struct PlacesView: View {
                 if !placesVM.places.isEmpty {
                     List(placesVM.places, id: \.properties.ogcFid) { place in
                         NavigationLink {
-                            coordinator.placeDetailScene(for: place, placeManager: placesObservable)
+                            coordinator.placeDetailScene(for: place)
                         } label: {
                             PlaceCellView(place: place)
                         }

@@ -16,8 +16,8 @@ class Coordinator: ObservableObject {
         PlacesView()
     }
 
-    func placeDetailScene(for place: Place, placeManager: PlacesObservable) -> some View {
-        PlaceDetail(placeDetailVM: PlaceDetailVM(for: place, placeManager: placeManager))
+    func placeDetailScene(for place: Place) -> some View {
+        PlaceDetail(placeDetailVM: PlaceDetailVM(for: place))
     }
 
     func placeInfoScene(with viewmodel: PlaceDetailVM) -> some View {
